@@ -1,0 +1,5116 @@
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://18836689037")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+for i = 1,game.ReplicatedStorage.GameData.LatestRoom.Value do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://18836689037")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+for i = 1,game.ReplicatedStorage.GameData.LatestRoom.Value do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://18836689037")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+for i = 1,game.ReplicatedStorage.GameData.LatestRoom.Value do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://18836689037")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+for i = 1,game.ReplicatedStorage.GameData.LatestRoom.Value do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://18836689037")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+for i = 1,game.ReplicatedStorage.GameData.LatestRoom.Value do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://18836689037")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+for i = 1,game.ReplicatedStorage.GameData.LatestRoom.Value do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://12254145022")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil and not v.Character:GetAttribute("Hiding") then
+			if canSeeTarget(v.Character,50) then
+				for i,v in pairs(ambush:GetChildren()) do
+					if v:IsA("Sound") then
+						v:Stop()
+					end
+				end
+				wait(5)
+				v.Character:FindFirstChild("Humanoid"):TakeDamage(100)
+			end
+		end
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+-- camera Shaker not working.. please do not mess with the script --
+local killed = false
+function GetTime(Distance, Speed)
+	-- Time = Distance / Speed
+	local Time = Distance / Speed
+	return Time
+end
+local Plr = game.Players.LocalPlayer
+local ReSt = game.ReplicatedStorage
+local val = 80
+local events = require(game.ReplicatedStorage.ClientModules.Module_Events)
+local cameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = workspace.CurrentCamera
+
+local camShake = cameraShaker.new(Enum.RenderPriority.Camera.Value, function(cf)
+	camera.CFrame = camera.CFrame * cf
+end)
+
+camShake:Start()
+local ambruhspeed = 40
+local ambushheight = Vector3.new(0,0.8,0)
+local storer = ambruhspeed
+local val = 80
+local DEF_SPEED = 99999
+
+local s = game:GetObjects("rbxassetid://18836689037")[1]
+s.Parent = workspace
+local ambush = s.Rebound
+
+local function canSeeTarget(target,size)
+	if killed == true then
+		return
+	end
+	local origin = ambush.Position
+	local direction = (target.HumanoidRootPart.Position - ambush.Position).unit * size
+	local ray = Ray.new(origin, direction)
+
+	local hit, pos = workspace:FindPartOnRay(ray, ambush)
+
+
+	if hit then
+		if hit:IsDescendantOf(target) then
+			killed = true
+			return true
+		end
+	else
+		return false
+	end
+end
+
+spawn(function()
+	while ambush ~= nil do wait(0.2)
+		local v = game.Players.LocalPlayer
+		if v.Character ~= nil then
+			if v.Character:FindFirstChild("HumanoidRootPart") and (ambush.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude <= val	 then
+				camShake:ShakeOnce(15,8.8,0,2,1,6)
+			end
+		end
+	end
+end)
+wait(5)
+local gruh = workspace.CurrentRooms
+ambruhspeed = DEF_SPEED
+for i = game.ReplicatedStorage.GameData.LatestRoom.Value, 1, -1 do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+for i = 1,game.ReplicatedStorage.GameData.LatestRoom.Value do
+	if gruh:FindFirstChild(i) then
+		print("room ".. i)
+		local room = gruh[i]
+		local door = room:FindFirstChild("Door")
+		local waypoint = door:FindFirstChild("Door")
+		local Distance = (ambush.Position - waypoint.Position).magnitude -- Get the distance between the current position and the next node
+		local fakejays = game.TweenService:Create(ambush,TweenInfo.new(2.2, Enum.EasingStyle.Sine,Enum.EasingDirection.Out, 0,false,0),{CFrame = waypoint.CFrame + ambushheight})
+		fakejays:Play()
+		fakejays.Completed:Wait()
+		ambruhspeed = storer
+	end
+	print("looping")
+end
+ambush.Anchored = false
+ambush.CanCollide = false
